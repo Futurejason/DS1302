@@ -154,62 +154,6 @@ namespace DS1302CLOCK {
         }
 
         /**
-         * get Month
-         */
-        //% blockId="DS1302_get_month" block="%ds|get month"
-        //% weight=78 blockGap=8
-        //% parts="DS1302CLOCK"
-        getMonth(): number {
-            return Math.max(Math.min(HexToDec(this.getReg(DS1302_REG_MONTH + 1)), 12), 1)
-        }
-
-        /**
-         * set month
-         * @param dat is Month will be set.  eg: 2
-         */
-        //% blockId="DS1302_set_month" block="%ds|set month %dat"
-        //% weight=79 blockGap=8
-        //% parts="DS1302CLOCK"
-        //% dat.min=1 dat.max=12
-        setMonth(dat: number): void {
-            this.wr(DS1302_REG_MONTH, DecToHex(dat % 13))
-        }
-
-        /**
-         * get Day
-         */
-        //% blockId="DS1302_get_day" block="%ds|get day"
-        //% weight=76 blockGap=8
-        //% parts="DS1302CLOCK"
-        getDay(): number {
-            return Math.max(Math.min(HexToDec(this.getReg(DS1302_REG_DAY + 1)), 31), 1)
-        }
-
-        /**
-         * set day
-         * @param dat is the Day will be set, eg: 15
-         */
-        //% blockId="DS1302_set_day" block="%ds|set day %dat"
-        //% weight=77 blockGap=8
-        //% parts="DS1302CLOCK"
-        //% dat.min=1 dat.max=31
-        setDay(dat: number): void {
-            this.wr(DS1302_REG_DAY, DecToHex(dat % 32))
-        }
-
-        
-
-        /**
-         * get Hour
-         */
-        //% blockId="DS1302_get_hour" block="%ds|get hour"
-        //% weight=72 blockGap=8
-        //% parts="DS1302CLOCK"
-        getHour(): number {
-            return Math.min(HexToDec(this.getReg(DS1302_REG_HOUR + 1)), 23)
-        }
-
-        /**
          * set hour
          * @param dat is the Hour will be set, eg: 0
          */
@@ -225,80 +169,8 @@ namespace DS1302CLOCK {
             this.wr(DS1302_REG_SECOND, DecToHex(sec % 60));
         }
 
-        /**
-         * get Minute
-         */
-        //% blockId="DS1302_get_minute" block="%ds|get minute"
-        //% weight=72 blockGap=8
-        //% parts="DS1302CLOCK"
-        getMinute(): number {
-            return Math.min(HexToDec(this.getReg(DS1302_REG_MINUTE + 1)), 59)
-        }
-
-        /**
-         * set minute
-         * @param dat is the Minute will be set, eg: 0
-         */
-        //% blockId="DS1302_set_minute" block="%ds|set minute %dat"
-        //% weight=71 blockGap=8
-        //% parts="DS1302CLOCK"
-        //% dat.min=0 dat.max=59
-        setMinute(dat: number): void {
-            this.wr(DS1302_REG_MINUTE, DecToHex(dat % 60))
-        }
-
-        /**
-         * get Second
-         */
-        //% blockId="DS1302_get_second" block="%ds|get second"
-        //% weight=70 blockGap=8
-        //% parts="DS1302CLOCK"
-        getSecond(): number {
-            return Math.min(HexToDec(this.getReg(DS1302_REG_SECOND + 1)), 59)
-        }
-
-        /**
-         * set second
-         * @param dat is the Second will be set, eg: 0
-         */
-        //% blockId="DS1302_set_second" block="%ds|set second %dat"
-        //% weight=69 blockGap=8
-        //% parts="DS1302CLOCK"
-        //% dat.min=0 dat.max=59
-        setSecond(dat: number): void {
-            this.wr(DS1302_REG_SECOND, DecToHex(dat % 60))
-        }
-
-        /**
-         * set Date and Time
-         * @param year is the Year will be set, eg: 2018
-         * @param month is the Month will be set, eg: 2
-         * @param day is the Day will be set, eg: 15
-         * @param weekday is the Weekday will be set, eg: 4
-         * @param hour is the Hour will be set, eg: 0
-         * @param minute is the Minute will be set, eg: 0
-         * @param second is the Second will be set, eg: 0
-         */
-        //% blockId="DS1302_set_DateTime" block="%ds|set Date and Time: Year %year|Month %month|Day %day|WeekDay %weekday|Hour %hour|Minute %minute|Second %second"
-        //% weight=50 blockGap=8
-        //% parts="DS1302CLOCK"
-        //% year.min=2000 year.max=2100
-        //% month.min=1 month.max=12
-        //% day.min=1 day.max=31
-        //% weekday.min=1 weekday.max=7
-        //% hour.min=0 hour.max=23
-        //% minute.min=0 minute.max=59
-        //% second.min=0 second.max=59
-        DateTime(year: number, month: number, day: number, weekday: number, hour: number, minute: number, second: number): void {
-            // this.setYear(year);
-            this.setMonth(month);
-            this.setDay(day);
-            // this.setWeekday(weekday);
-            // this.setHour(hour);
-            this.setMinute(minute);
-            this.setSecond(second);
-        }
-
+        
+        
         /**
          * start DS1302CLOCK RTC (go on)
          */
@@ -306,8 +178,8 @@ namespace DS1302CLOCK {
         //% weight=41 blockGap=8
         //% parts="DS1302CLOCK"
         start() {
-            let t = this.getSecond()
-            this.setSecond(t & 0x7f)
+            let t = Math.min(HexToDec(this.getReg(DS1302_REG_SECOND + 1)), 59)
+            this.wr(DS1302_REG_SECOND, DecToHex(t & 0x7f % 60))
         }
 
         /**
@@ -317,14 +189,13 @@ namespace DS1302CLOCK {
         //% weight=40 blockGap=8
         //% parts="DS1302CLOCK"
         pause() {
-            let t = this.getSecond()
-            this.setSecond(t | 0x80)
+            let t = Math.min(HexToDec(this.getReg(DS1302_REG_SECOND + 1)), 59)
+            this.wr(DS1302_REG_SECOND, DecToHex(t | 0x80 % 60))
         }
 
     }
 
     /**
-     * 创建接口引脚
      * create a DS1302CLOCK object.
      * @param clk the CLK pin for DS1302CLOCK, eg: DigitalPin.P13
      * @param dio the DIO pin for DS1302CLOCK, eg: DigitalPin.P14
