@@ -4,6 +4,23 @@
 * http://www.micropython.org.cn
 */
 
+enum times{
+    //% block=year
+    time1 = 0,
+    //% block=month
+    time2 = 1,
+    //% block=day
+    time3 = 2,
+    //% block=hour
+    time4 = 3,
+    //% block=minute
+    time5 = 4,
+    //% block=second
+    time6 = 5,
+}
+
+
+
 /**
  * DS1302 block
  */
@@ -100,22 +117,40 @@ namespace DS1302 {
         /**
          * get Year
          */
-        //% blockId="DS1302_get_year" block="%ds|get year"
+        //% blockId="DS1302_get_year" block="%ds|get time %TIME"
         //% weight=80 blockGap=8
         //% parts="DS1302"
-        getYear(): number {
-            return Math.min(HexToDec(this.getReg(DS1302_REG_YEAR + 1)), 99) + 2000
+        getYear(TIME: times): number {
+            switch(TIME){
+                case 0:
+                    return Math.min(HexToDec(this.getReg(DS1302_REG_YEAR + 1)), 99) + 2000;
+                case 1:
+                    return Math.max(Math.min(HexToDec(this.getReg(DS1302_REG_MONTH + 1)), 12), 1);
+                case 2:
+                    return Math.max(Math.min(HexToDec(this.getReg(DS1302_REG_DAY + 1)), 31), 1);
+                case 3:
+                    return Math.min(HexToDec(this.getReg(DS1302_REG_HOUR + 1)), 23);
+                case 4:
+                    return Math.min(HexToDec(this.getReg(DS1302_REG_MINUTE + 1)), 59);
+                default:
+                    return Math.min(HexToDec(this.getReg(DS1302_REG_SECOND + 1)), 59);
+            }
+            
         }
 
         /**
          * set year
          * @param dat is the Year will be set, eg: 2018
          */
-        //% blockId="DS1302_set_year" block="%ds|set year %dat"
+        //% blockId="DS1302_set_year" block="%ds|set year %dat set month %mon set day %days"
         //% weight=81 blockGap=8
         //% parts="DS1302"
-        setYear(dat: number): void {
-            this.wr(DS1302_REG_YEAR, DecToHex(dat % 100))
+        //% mon.min=1 mon.max=12
+        //% days.min=1 days.max=31
+        setYear(dat: number, mon: number, days: number): void {
+            this.wr(DS1302_REG_YEAR, DecToHex(dat % 100));
+            this.wr(DS1302_REG_MONTH, DecToHex(mon % 13));
+            this.wr(DS1302_REG_DAY, DecToHex(days % 32))
         }
 
         /**
@@ -178,12 +213,16 @@ namespace DS1302 {
          * set hour
          * @param dat is the Hour will be set, eg: 0
          */
-        //% blockId="DS1302_set_hour" block="%ds|set hour %dat"
+        //% blockId="DS1302_set_hour" block="%ds|set hour %dat set minute %minu set second %sec"
         //% weight=73 blockGap=8
         //% parts="DS1302"
         //% dat.min=0 dat.max=23
-        setHour(dat: number): void {
-            this.wr(DS1302_REG_HOUR, DecToHex(dat % 24))
+        //% minu.min=0 minu.max=59
+        //% sec.min=0 sec.max=59
+        setHour(dat: number, minu: number, sec: number): void {
+            this.wr(DS1302_REG_HOUR, DecToHex(dat % 24));
+            this.wr(DS1302_REG_MINUTE, DecToHex(minu % 60));
+            this.wr(DS1302_REG_SECOND, DecToHex(sec % 60));
         }
 
         /**
