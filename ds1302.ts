@@ -162,27 +162,27 @@ namespace DS1302 {
             this.wr(DS1302_REG_DAY, DecToHex(dat % 32))
         }
 
-        /**
-         * get Week Day
-         */
-        //% blockId="DS1302_get_weekday" block="%ds|get weekday"
-        //% weight=74 blockGap=8
-        //% parts="DS1302"
-        getWeekday(): number {
-            return Math.max(Math.min(HexToDec(this.getReg(DS1302_REG_WEEKDAY + 1)), 7), 1)
-        }
+        // /**
+        //  * get Week Day
+        //  */
+        // //% blockId="DS1302_get_weekday" block="%ds|get weekday"
+        // //% weight=74 blockGap=8
+        // //% parts="DS1302"
+        // getWeekday(): number {
+        //     return Math.max(Math.min(HexToDec(this.getReg(DS1302_REG_WEEKDAY + 1)), 7), 1)
+        // }
 
-        /**
-         * set weekday
-         * @param dat is the Week Day will be set, eg: 4
-         */
-        //% blockId="DS1302_set_weekday" block="%ds|set weekday %dat"
-        //% weight=75 blockGap=8
-        //% parts="DS1302"
-        //% dat.min=1 dat.max=7
-        setWeekday(dat: number): void {
-            this.wr(DS1302_REG_WEEKDAY, DecToHex(dat % 8))
-        }
+        // /**
+        //  * set weekday
+        //  * @param dat is the Week Day will be set, eg: 4
+        //  */
+        // //% blockId="DS1302_set_weekday" block="%ds|set weekday %dat"
+        // //% weight=75 blockGap=8
+        // //% parts="DS1302"
+        // //% dat.min=1 dat.max=7
+        // setWeekday(dat: number): void {
+        //     this.wr(DS1302_REG_WEEKDAY, DecToHex(dat % 8))
+        // }
 
         /**
          * get Hour
@@ -274,7 +274,7 @@ namespace DS1302 {
             this.setYear(year);
             this.setMonth(month);
             this.setDay(day);
-            this.setWeekday(weekday);
+            // this.setWeekday(weekday);
             this.setHour(hour);
             this.setMinute(minute);
             this.setSecond(second);
@@ -302,30 +302,31 @@ namespace DS1302 {
             this.setSecond(t | 0x80)
         }
 
-        /**
-         * read RAM
-         */
-        //% blockId="DS1302_read_ram" block="%ds|read ram %reg"
-        //% weight=43 blockGap=8
-        //% parts="DS1302"
-        //% reg.min=0 reg.max=30
-        readRam(reg: number): number {
-            return this.getReg(DS1302_REG_RAM + 1 + (reg % 31) * 2)
-        }
+        // /**
+        //  * read RAM
+        //  */
+        // //% blockId="DS1302_read_ram" block="%ds|read ram %reg"
+        // //% weight=43 blockGap=8
+        // //% parts="DS1302"
+        // //% reg.min=0 reg.max=30
+        // readRam(reg: number): number {
+        //     return this.getReg(DS1302_REG_RAM + 1 + (reg % 31) * 2)
+        // }
 
-        /**
-         * write RAM
-         */
-        //% blockId="DS1302_write_ram" block="%ds|write ram %reg|with %dat"
-        //% weight=42 blockGap=8
-        //% parts="DS1302"
-        //% reg.min=0 reg.max=30
-        writeRam(reg: number, dat: number) {
-            this.wr(DS1302_REG_RAM + (reg % 31) * 2, dat)
-        }
+        // /**
+        //  * write RAM
+        //  */
+        // //% blockId="DS1302_write_ram" block="%ds|write ram %reg|with %dat"
+        // //% weight=42 blockGap=8
+        // //% parts="DS1302"
+        // //% reg.min=0 reg.max=30
+        // writeRam(reg: number, dat: number) {
+        //     this.wr(DS1302_REG_RAM + (reg % 31) * 2, dat)
+        // }
     }
 
     /**
+     * 创建接口引脚
      * create a DS1302 object.
      * @param clk the CLK pin for DS1302, eg: DigitalPin.P13
      * @param dio the DIO pin for DS1302, eg: DigitalPin.P14

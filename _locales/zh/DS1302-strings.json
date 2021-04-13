@@ -19,5 +19,5 @@
     "DS1302.DS1302RTC.pause|block": "%ds|暂停时钟",
     "DS1302.DS1302RTC.readRam|block": "%ds|读取RAM %reg",
     "DS1302.DS1302RTC.writeRam|block": "%ds|写入RAM %reg|数据 %dat",
-    "DS1302.create|block": "创建 CLK %clk|DIO %dio|CS %cs"
+    "DS1302.create|block": "创建 CLK %clk|DAT %dio|RST %cs"
 }
