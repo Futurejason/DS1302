@@ -1,15 +1,15 @@
 {
-    "name": "DS1302",
+    "name": "DS1302CLOCK",
     "version": "1.1.0",
-    "description": "makecode DS1302 RTC Package for micro:bit",
+    "description": "makecode DS1302CLOCK RTC Package for micro:bit",
     "license": "MIT",
     "dependencies": {
         "core": "*"
     },
     "files": [
         "README.md",
-        "_locales/zh/DS1302-strings.json",
-        "ds1302.ts"
+        "_locales/zh/DS1302CLOCK-strings.json",
+        "DS1302CLOCK.ts"
     ],
     "testFiles": [
         "test.ts"
