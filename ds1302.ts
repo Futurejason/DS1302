@@ -1,5 +1,5 @@
 /**
-* makecode DS1302 RTC Package.
+* makecode DS1302CLOCK RTC Package.
 * From microbit/micropython Chinese community.
 * http://www.micropython.org.cn
 */
@@ -22,10 +22,10 @@ enum times{
 
 
 /**
- * DS1302 block
+ * DS1302CLOCK block
  */
-//% weight=100 color=#A050E0 icon="\uf017" block="RTC DS1302"
-namespace DS1302 {
+//% weight=100 color=#A050E0 icon="\uf017" block="RTC DS1302CLOCK"
+namespace DS1302CLOCK {
     let DS1302_REG_SECOND = 0x80
     let DS1302_REG_MINUTE = 0x82
     let DS1302_REG_HOUR = 0x84
@@ -52,7 +52,7 @@ namespace DS1302 {
     }
 
     /**
-     * DS1302 RTC class
+     * DS1302CLOCK RTC class
      */
     export class DS1302RTC {
         clk: DigitalPin;
@@ -60,7 +60,7 @@ namespace DS1302 {
         cs: DigitalPin;
 
         /**
-         * write a byte to DS1302
+         * write a byte to DS1302CLOCK
          */
         write_byte(dat: number) {
             for (let i = 0; i < 8; i++) {
@@ -71,7 +71,7 @@ namespace DS1302 {
         }
 
         /**
-         * read a byte from DS1302
+         * read a byte from DS1302CLOCK
          */
         read_byte(): number {
             let d = 0;
@@ -119,7 +119,7 @@ namespace DS1302 {
          */
         //% blockId="DS1302_get_year" block="%ds|get time %TIME"
         //% weight=80 blockGap=8
-        //% parts="DS1302"
+        //% parts="DS1302CLOCK"
         getYear(TIME: times): number {
             switch(TIME){
                 case 0:
@@ -144,7 +144,7 @@ namespace DS1302 {
          */
         //% blockId="DS1302_set_year" block="%ds|set year %dat set month %mon set day %days"
         //% weight=81 blockGap=8
-        //% parts="DS1302"
+        //% parts="DS1302CLOCK"
         //% mon.min=1 mon.max=12
         //% days.min=1 days.max=31
         setYear(dat: number, mon: number, days: number): void {
@@ -158,7 +158,7 @@ namespace DS1302 {
          */
         //% blockId="DS1302_get_month" block="%ds|get month"
         //% weight=78 blockGap=8
-        //% parts="DS1302"
+        //% parts="DS1302CLOCK"
         getMonth(): number {
             return Math.max(Math.min(HexToDec(this.getReg(DS1302_REG_MONTH + 1)), 12), 1)
         }
@@ -169,7 +169,7 @@ namespace DS1302 {
          */
         //% blockId="DS1302_set_month" block="%ds|set month %dat"
         //% weight=79 blockGap=8
-        //% parts="DS1302"
+        //% parts="DS1302CLOCK"
         //% dat.min=1 dat.max=12
         setMonth(dat: number): void {
             this.wr(DS1302_REG_MONTH, DecToHex(dat % 13))
@@ -180,7 +180,7 @@ namespace DS1302 {
          */
         //% blockId="DS1302_get_day" block="%ds|get day"
         //% weight=76 blockGap=8
-        //% parts="DS1302"
+        //% parts="DS1302CLOCK"
         getDay(): number {
             return Math.max(Math.min(HexToDec(this.getReg(DS1302_REG_DAY + 1)), 31), 1)
         }
@@ -191,7 +191,7 @@ namespace DS1302 {
          */
         //% blockId="DS1302_set_day" block="%ds|set day %dat"
         //% weight=77 blockGap=8
-        //% parts="DS1302"
+        //% parts="DS1302CLOCK"
         //% dat.min=1 dat.max=31
         setDay(dat: number): void {
             this.wr(DS1302_REG_DAY, DecToHex(dat % 32))
@@ -204,7 +204,7 @@ namespace DS1302 {
          */
         //% blockId="DS1302_get_hour" block="%ds|get hour"
         //% weight=72 blockGap=8
-        //% parts="DS1302"
+        //% parts="DS1302CLOCK"
         getHour(): number {
             return Math.min(HexToDec(this.getReg(DS1302_REG_HOUR + 1)), 23)
         }
@@ -215,7 +215,7 @@ namespace DS1302 {
          */
         //% blockId="DS1302_set_hour" block="%ds|set hour %dat set minute %minu set second %sec"
         //% weight=73 blockGap=8
-        //% parts="DS1302"
+        //% parts="DS1302CLOCK"
         //% dat.min=0 dat.max=23
         //% minu.min=0 minu.max=59
         //% sec.min=0 sec.max=59
@@ -230,7 +230,7 @@ namespace DS1302 {
          */
         //% blockId="DS1302_get_minute" block="%ds|get minute"
         //% weight=72 blockGap=8
-        //% parts="DS1302"
+        //% parts="DS1302CLOCK"
         getMinute(): number {
             return Math.min(HexToDec(this.getReg(DS1302_REG_MINUTE + 1)), 59)
         }
@@ -241,7 +241,7 @@ namespace DS1302 {
          */
         //% blockId="DS1302_set_minute" block="%ds|set minute %dat"
         //% weight=71 blockGap=8
-        //% parts="DS1302"
+        //% parts="DS1302CLOCK"
         //% dat.min=0 dat.max=59
         setMinute(dat: number): void {
             this.wr(DS1302_REG_MINUTE, DecToHex(dat % 60))
@@ -252,7 +252,7 @@ namespace DS1302 {
          */
         //% blockId="DS1302_get_second" block="%ds|get second"
         //% weight=70 blockGap=8
-        //% parts="DS1302"
+        //% parts="DS1302CLOCK"
         getSecond(): number {
             return Math.min(HexToDec(this.getReg(DS1302_REG_SECOND + 1)), 59)
         }
@@ -263,7 +263,7 @@ namespace DS1302 {
          */
         //% blockId="DS1302_set_second" block="%ds|set second %dat"
         //% weight=69 blockGap=8
-        //% parts="DS1302"
+        //% parts="DS1302CLOCK"
         //% dat.min=0 dat.max=59
         setSecond(dat: number): void {
             this.wr(DS1302_REG_SECOND, DecToHex(dat % 60))
@@ -281,7 +281,7 @@ namespace DS1302 {
          */
         //% blockId="DS1302_set_DateTime" block="%ds|set Date and Time: Year %year|Month %month|Day %day|WeekDay %weekday|Hour %hour|Minute %minute|Second %second"
         //% weight=50 blockGap=8
-        //% parts="DS1302"
+        //% parts="DS1302CLOCK"
         //% year.min=2000 year.max=2100
         //% month.min=1 month.max=12
         //% day.min=1 day.max=31
@@ -300,22 +300,22 @@ namespace DS1302 {
         }
 
         /**
-         * start ds1302 RTC (go on)
+         * start DS1302CLOCK RTC (go on)
          */
         //% blockId="DS1302_start" block="%ds|start RTC"
         //% weight=41 blockGap=8
-        //% parts="DS1302"
+        //% parts="DS1302CLOCK"
         start() {
             let t = this.getSecond()
             this.setSecond(t & 0x7f)
         }
 
         /**
-         * pause ds1302 RTC
+         * pause DS1302CLOCK RTC
          */
         //% blockId="DS1302_pause" block="%ds|pause RTC"
         //% weight=40 blockGap=8
-        //% parts="DS1302"
+        //% parts="DS1302CLOCK"
         pause() {
             let t = this.getSecond()
             this.setSecond(t | 0x80)
@@ -325,10 +325,10 @@ namespace DS1302 {
 
     /**
      * 创建接口引脚
-     * create a DS1302 object.
-     * @param clk the CLK pin for DS1302, eg: DigitalPin.P13
-     * @param dio the DIO pin for DS1302, eg: DigitalPin.P14
-     * @param cs the CS pin for DS1302, eg: DigitalPin.P15
+     * create a DS1302CLOCK object.
+     * @param clk the CLK pin for DS1302CLOCK, eg: DigitalPin.P13
+     * @param dio the DIO pin for DS1302CLOCK, eg: DigitalPin.P14
+     * @param cs the CS pin for DS1302CLOCK, eg: DigitalPin.P15
      */
     //% weight=200 blockGap=8
     //% blockId="DS1302_create" block="CLK %clk|DIO %dio|CS %cs"
