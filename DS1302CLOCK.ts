@@ -1,8 +1,3 @@
-/**
-* makecode DS1302CLOCK RTC Package.
-* From microbit/micropython Chinese community.
-* http://www.micropython.org.cn
-*/
 
 enum times{
     //% block=year
