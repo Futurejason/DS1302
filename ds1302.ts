@@ -7,7 +7,7 @@
 /**
  * DS1302 block
  */
-//% weight=100 color=#A040E0 icon="\uf017" block="RTC DS1302"
+//% weight=100 color=#A050E0 icon="\uf017" block="RTC DS1302"
 namespace DS1302 {
     let DS1302_REG_SECOND = 0x80
     let DS1302_REG_MINUTE = 0x82
@@ -282,27 +282,6 @@ namespace DS1302 {
             this.setSecond(t | 0x80)
         }
 
-        // /**
-        //  * read RAM
-        //  */
-        // //% blockId="DS1302_read_ram" block="%ds|read ram %reg"
-        // //% weight=43 blockGap=8
-        // //% parts="DS1302"
-        // //% reg.min=0 reg.max=30
-        // readRam(reg: number): number {
-        //     return this.getReg(DS1302_REG_RAM + 1 + (reg % 31) * 2)
-        // }
-
-        // /**
-        //  * write RAM
-        //  */
-        // //% blockId="DS1302_write_ram" block="%ds|write ram %reg|with %dat"
-        // //% weight=42 blockGap=8
-        // //% parts="DS1302"
-        // //% reg.min=0 reg.max=30
-        // writeRam(reg: number, dat: number) {
-        //     this.wr(DS1302_REG_RAM + (reg % 31) * 2, dat)
-        // }
     }
 
     /**
