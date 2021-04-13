@@ -162,27 +162,7 @@ namespace DS1302 {
             this.wr(DS1302_REG_DAY, DecToHex(dat % 32))
         }
 
-        // /**
-        //  * get Week Day
-        //  */
-        // //% blockId="DS1302_get_weekday" block="%ds|get weekday"
-        // //% weight=74 blockGap=8
-        // //% parts="DS1302"
-        // getWeekday(): number {
-        //     return Math.max(Math.min(HexToDec(this.getReg(DS1302_REG_WEEKDAY + 1)), 7), 1)
-        // }
-
-        // /**
-        //  * set weekday
-        //  * @param dat is the Week Day will be set, eg: 4
-        //  */
-        // //% blockId="DS1302_set_weekday" block="%ds|set weekday %dat"
-        // //% weight=75 blockGap=8
-        // //% parts="DS1302"
-        // //% dat.min=1 dat.max=7
-        // setWeekday(dat: number): void {
-        //     this.wr(DS1302_REG_WEEKDAY, DecToHex(dat % 8))
-        // }
+        
 
         /**
          * get Hour
