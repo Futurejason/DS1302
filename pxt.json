@@ -1,7 +1,7 @@
 {
     "name": "DS1302CLOCK",
     "version": "1.1.0",
-    "description": "makecode DS1302CLOCK RTC Package for micro:bit",
+    "description": "DS1302时钟模块",
     "license": "MIT",
     "dependencies": {
         "core": "*"

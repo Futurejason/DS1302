@@ -290,11 +290,11 @@ namespace DS1302CLOCK {
         //% minute.min=0 minute.max=59
         //% second.min=0 second.max=59
         DateTime(year: number, month: number, day: number, weekday: number, hour: number, minute: number, second: number): void {
-            this.setYear(year);
+            // this.setYear(year);
             this.setMonth(month);
             this.setDay(day);
             // this.setWeekday(weekday);
-            this.setHour(hour);
+            // this.setHour(hour);
             this.setMinute(minute);
             this.setSecond(second);
         }

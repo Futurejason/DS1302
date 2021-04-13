@@ -1,6 +1,6 @@
 {
     "DS1302CLOCK|block": "DS1302时钟",
-    "DS1302CLOCK.DS1302RTC.getYear|block": "%ds|读取年",
+    "DS1302CLOCK.DS1302RTC.getYear|block": "%ds|读取时间 %TIME",
     "DS1302CLOCK.DS1302RTC.setYear|block": "%ds|设置年 %dat 月 %mon 日 %days ",
     "DS1302CLOCK.DS1302RTC.getMonth|block": "%ds|读取月",
     "DS1302CLOCK.DS1302RTC.setMonth|block": "%ds|设置月 %dat",
@@ -15,7 +15,5 @@
     "DS1302CLOCK.DS1302RTC.DateTime|block": "%ds|设置时间: 年 %year|月 %month|日 %day|星期 %weekday|时 %hour|分 %minute|秒 %second",
     "DS1302CLOCK.DS1302RTC.start|block": "%ds|启动时钟",
     "DS1302CLOCK.DS1302RTC.pause|block": "%ds|暂停时钟",
-    "DS1302CLOCK.DS1302RTC.readRam|block": "%ds|读取RAM %reg",
-    "DS1302CLOCK.DS1302RTC.writeRam|block": "%ds|写入RAM %reg|数据 %dat",
     "DS1302CLOCK.create|block": "创建 CLK %clk|DAT %dio|RST %cs"
 }
